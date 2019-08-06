@@ -1,4 +1,5 @@
 import "reflect-metadata";
+import * as path from "path";
 // require("reflect-metadata");
 import { createConnection } from "typeorm";
 import * as express from "express";
@@ -28,7 +29,7 @@ createConnection()
 		// 	});
 		// });
 
-		RegisterRoutes(app, [UserController]);
+		RegisterRoutes(app);
 
 		// setup express app here
 		// ...

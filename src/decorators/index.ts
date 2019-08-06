@@ -1,4 +1,5 @@
 import { Request, Response, Express } from "express";
+import { loadTsClassesFromDirectory } from "./utils";
 
 const PREFIX_METADATA_KEY = Symbol("prefix");
 const ROUTES_METADATA_KEY = Symbol("routes");
@@ -33,9 +34,9 @@ const updateRoutesMetadata = (requestType: HttpRequestType, path: string, target
 	Reflect.defineMetadata(ROUTES_METADATA_KEY, routes, target);
 };
 
-export const RegisterRoutes = (app: Express, controllers: ControllersType = "./controllers") => {
+export const RegisterRoutes = (app: Express, controllers: ControllersType = "src/controller") => {
 	if (typeof controllers === "undefined" || typeof controllers === "string") {
-		return;
+		controllers = loadTsClassesFromDirectory(controllers);
 	}
 
 	controllers.forEach(controller => {
