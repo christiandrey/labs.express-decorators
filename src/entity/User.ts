@@ -1,18 +1,28 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { ElfUser } from "../auth/entities";
 
 @Entity()
-export class User {
+export class User extends ElfUser {
+	@Column()
+	firstName: string;
 
-    @PrimaryGeneratedColumn()
-    id: number;
+	@Column()
+	lastName: string;
 
-    @Column()
-    firstName: string;
+	@Column()
+	age: number;
 
-    @Column()
-    lastName: string;
+	password: string;
 
-    @Column()
-    age: number;
+	/**
+	 *
+	 */
+	constructor(dto: Partial<User> = {}) {
+		super(dto);
 
+		this.firstName = dto.firstName;
+		this.lastName = dto.lastName;
+		this.age = dto.age;
+		this.password = dto.password;
+	}
 }

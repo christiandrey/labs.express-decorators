@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import * as path from "path";
 // require("reflect-metadata");
-import { createConnection } from "typeorm";
+import { createConnection, getRepository } from "typeorm";
 import * as express from "express";
 import * as bodyParser from "body-parser";
 // import { Request, Response } from "express";
@@ -9,6 +9,7 @@ import * as bodyParser from "body-parser";
 import { User } from "./entity/User";
 import { RegisterRoutes } from "./decorators";
 import { UserController } from "./controller/UserController";
+import { InitializeAuthentication } from "./auth/config";
 
 createConnection()
 	.then(async connection => {
@@ -30,6 +31,7 @@ createConnection()
 		// });
 
 		RegisterRoutes(app);
+		InitializeAuthentication(getRepository(User), "loremIPSUM");
 
 		// setup express app here
 		// ...
@@ -42,6 +44,7 @@ createConnection()
 		// 	connection.manager.create(User, {
 		// 		firstName: "Timber",
 		// 		lastName: "Saw",
+		// 		email: "timber@example.com",
 		// 		age: 27
 		// 	})
 		// );
@@ -49,6 +52,7 @@ createConnection()
 		// 	connection.manager.create(User, {
 		// 		firstName: "Phantom",
 		// 		lastName: "Assassin",
+		// 		email: "phantom@example.com",
 		// 		age: 24
 		// 	})
 		// );
