@@ -1,7 +1,6 @@
 import { AuthorizeUser, AuthorizeUserRoles, AuthorizeUsers } from "../auth";
 import { Request, Response, Express } from "express";
 import { loadTsClassesFromDirectory } from "./utils";
-import passport = require("passport");
 import { HttpResponse, HttpStatusCodes, ApiResponse, ApiResponseError } from "../utils";
 
 const PREFIX_METADATA_KEY = Symbol("prefix");
